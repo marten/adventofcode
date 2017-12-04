@@ -26,6 +26,41 @@ defmodule DayOne do
     solver(list ++ [head])
   end
 
+  @doc """
+  iex> DayOne.solve_b("1212")
+  6
+
+  iex> DayOne.solve_b("1221")
+  0
+
+  iex> DayOne.solve_b("123425")
+  4
+
+  iex> DayOne.solve_b("123123")
+  12
+
+  iex> DayOne.solve_b("12131415")
+  4
+  """
+  def solve_b(str) do
+    # len = String.length(str)
+    # {a, b} = String.split_at(len / 2)
+
+    # list = [String.codepoints(a),
+    #         String.codepoints(b)] |> Enum.zip
+    # head = List.first(list)
+    # solver(list ++ [head])
+  end
+
+  @doc """
+  iex> DayOne.convert([1,2,3,4,5,6])
+  [1,4,2,5,3,6,4]
+  """
+
+  def convert(list) do
+
+  end
+
   def solver([]) do
     0
   end
