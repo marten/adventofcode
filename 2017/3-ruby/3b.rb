@@ -6,34 +6,16 @@ Spiral = Enumerator.new do |out|
 
   row = -1
   col = 1
+  len = 2
 
   out << [row, col]
 
-  len = 2
-
   loop do
-    len.times do
-      col = col-1
-      out << [row, col]
-    end
-
-    len.times do
-      row = row+1
-      out << [row, col]
-    end
-
+    len.times { col -= 1; out << [row, col] }
+    len.times { row += 1; out << [row, col] }
     len += 1
-
-    len.times do
-      col = col+1
-      out << [row, col]
-    end
-
-    len.times do
-      row = row-1
-      out << [row, col]
-    end
-
+    len.times { col += 1; out << [row, col] }
+    len.times { row -= 1; out << [row, col] }
     len += 1
   end
 end
