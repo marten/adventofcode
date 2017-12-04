@@ -39,13 +39,11 @@ Spiral = Enumerator.new do |out|
 end
 
 class Grid
-  attr_accessor :row, :col, :size
+  attr_accessor :size
 
   def initialize(size)
     @size = size
     @rows = []
-    @row = 0
-    @col = 0
 
     for i in 0..(@size-1)
       @rows[i] = Array.new(@size, 0)
@@ -65,40 +63,16 @@ class Grid
     @rows[row][col] || 0
   end
 
-  def nextval
-    neighbours(@row, @col).sum
-  end
-
   def neighbours(row, col)
     [at(row-1, col-1), at(row-1, col), at(row-1, col+1),
      at(row,   col-1),                 at(row,   col+1),
      at(row+1, col-1), at(row+1, col), at(row+1, col+1)]
   end
 
-  def find_next_cell
-    tx = @row - (@size/2)
-    ty = @col - (@size/2)
-
-    case
-    when tx > 0 && tx > ty.abs
-      puts 'move up'
-      [@row - 1, @col] # move up
-    when ty > 0 && ty >= tx.abs
-      puts 'move right'
-      [@row, @col + 1] # move right
-    when tx < 0 && tx <= ty
-      puts 'move down'
-      [@row+1, @col] # move down
-    else
-      puts 'move left'
-      [@row, @col-1] # move left
-    end
-  end
-
-  def inspect
+  def inspect(r, c)
     @rows.map.with_index do |row, ri|
       row.map.with_index do |cell, ci|
-        if ri == @row && ci == @col
+        if ri == r && ci == c
           Rainbow("#{cell}").color(:yellow)
         else
           "#{cell}"
@@ -116,16 +90,16 @@ Spiral.take(grid.size ** 2).each.with_index do |position, idx|
   next if idx <= 1
   row, col = position
   puts "="*100
-  grid.row = row + grid.size/2
-  grid.col = col + grid.size/2
+  row = row + grid.size/2
+  col = col + grid.size/2
 
-  value = grid.neighbours(grid.row, grid.col).sum
+  value = grid.neighbours(row, col).sum
 
-  puts "Currently at row: #{grid.row}, col: #{grid.col}"
-  puts "Neighbours: #{grid.neighbours(grid.row, grid.col).inspect}"
+  puts "Currently at row: #{row}, col: #{col}"
+  puts "Neighbours: #{grid.neighbours(row, col).inspect}"
   puts "I will put #{value} into this cell"
 
-  grid.set(grid.row, grid.col, grid.nextval)
-  puts grid.inspect
+  grid.set(row, col, value)
+  puts grid.inspect(row, col)
   break if value > 325489
 end
