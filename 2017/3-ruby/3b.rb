@@ -54,11 +54,10 @@ class Grid
   def inspect(r, c)
     @rows.map.with_index do |row, ri|
       row.map.with_index do |cell, ci|
-        if ri == r && ci == c
-          Rainbow("#{cell}").color(:yellow)
-        else
-          "#{cell}"
-        end
+        val = Rainbow(cell.to_s)
+        val = val.background(:red) if ri == r && ci == c
+        val = val.color(:yellow) if cell != 0
+        val
       end.join("\t")
     end.join("\n")
   end
