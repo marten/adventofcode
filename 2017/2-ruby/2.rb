@@ -15,7 +15,7 @@ divisors = lines.map do |line|
     else
       0
     end
-  end.reduce(&:+)
+  end.sum
 end
 
 puts "2b: #{divisors.reduce(&:+)}"
