@@ -5,6 +5,7 @@ states = Set.new
 history = []
 
 while !states.include?(state)
+  puts state.inspect
   states << state
   history << state.dup
 
