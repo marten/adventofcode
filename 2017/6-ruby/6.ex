@@ -28,7 +28,6 @@ defmodule Six do
   end
 end
 
-state = [0,2,7,0]
 IO.puts Six.solve([4, 1, 15, 12, 0, 9, 9, 5, 5, 8, 7, 3, 14, 5, 12, 3], MapSet.new)
 
 # puts "Iterations needed: #{states.size}"
