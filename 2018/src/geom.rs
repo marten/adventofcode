@@ -5,7 +5,7 @@ use std::ops;
 use std::ops::RangeInclusive;
 
 // A discrete point on a 2D integer grid.
-#[derive(Copy, Clone, Debug, PartialEq, Eq)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq, Hash)]
 pub struct Point {
     pub x: i32,
     pub y: i32,
@@ -66,6 +66,15 @@ impl Rect {
     pub fn contains(&self, point: Point) -> bool {
         // Range::contains is nightly-only.
         self.x_min() <= point.x && point.x <= self.x_max() && self.y_min() <= point.y && point.y <= self.y_max()
+    }
+
+    pub fn overlaps_with(&self, other: Rect) -> bool {
+        for point in other.iter() {
+            if self.contains(point) {
+                return true
+            }
+        }
+        false
     }
 
     pub fn iter(&self) -> RectIter {
