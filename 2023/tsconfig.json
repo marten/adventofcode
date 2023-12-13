@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ES5",
+    "target": "ESNext",
     "module": "CommonJS",
     "outDir": "out",
-    "sourceMap": true
+    "sourceMap": true,
+    "types": ["bun-types"]
   }
 }

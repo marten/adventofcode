@@ -1,7 +1,6 @@
-import * as fs from 'node:fs'
+import { readFile } from '../helpers'
 
-const filePath = './1a.txt'
-const fileContent = fs.readFileSync(filePath, 'utf-8')
+const fileContent = readFile('01/day01.txt')
 
 const MATCHER = /(one|two|three|four|five|six|seven|eight|nine|\d)/g
 
